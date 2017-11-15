@@ -1,0 +1,34 @@
+<!DOCTYPE html>                                     <!-- HTML5で作成されたファイルである -->
+<html lang="ja">
+    <head>                                          <!-- ページの情報を表す -->
+        <meta charset="UTF-8" />                    <!-- 文字コードの指定 -->
+        <title>掲示板</title>                 <!-- ブラウザのタイトルバー -->
+        <link rel="stylesheet" href="bbs.css">    <!-- rel（レル）relation, href（エイチレフ）hyper reference, CSSを読み込む処理 -->
+    </head>
+    <body>                                           <!-- ページの内容 -->
+        <h1>クロスバイク初心者おたす掲示板</h1>                        <!-- 大見出し -->
+        <section>
+            <h2 class="a">投稿一覧</h2>
+            <p>nothing...</p>
+        </section>
+        <section>
+            <h2 class="a">書き込む</h2>
+                <form action="" method="post">
+                <!-- <form>入力フォーム, <action>実行された時の動作, <method>サーバにデータを送る形式-->
+                    ハンドルネーム：<input type="text" name="name" value=""><br><br>
+                     <!-- <input>フォームの部品, <br>改行break -->
+                    <textarea name="comment" cols=40 rows=4 placeholder="コメントをどうぞ"></textarea>
+                    <input type="submit" value="投稿"><br>
+                    <input type="reset" value="取消">
+                </form>
+        </section>
+            
+
+            <!-- 
+            <p id="a">こんにち</p>                     //タグにIDを設定する
+            <p class="b">こんに</p>                    //タグにclassを設定する
+            <p class="c">こ</p>
+            <p class="b c">んにちは</p>
+            -->
+    </body>
+</html>
