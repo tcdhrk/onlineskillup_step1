@@ -55,6 +55,8 @@
             $stmt->execute();
 
 
+            //追加してみた！
+
             //切断
             $mysqli->close();
         ?>
