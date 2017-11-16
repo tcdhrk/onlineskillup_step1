@@ -7,6 +7,16 @@
     </head>
     <body>
         <h1>クロスバイク初心者おたす掲示板</h1>
+            <section>
+                <h2 class="a">書き込む</h2>               
+                <form method="POST" action="bbs.php">      <!-- actionは送信先URL -->
+                    ハンドルネーム：<input type="text" name="name" value=""><br><br>
+                    <textarea name="comment" cols=40 rows=4 placeholder="コメントをどうぞ"></textarea>
+                    <input type="submit" value="投稿" />      <!-- <form>タグのactionが呼び出される 送信ボタン -->
+                    <input type="reset" value="取消">
+                </form>
+            </section>
+
         <?php
             //接続　phpからデータベースへ
             //mysqliクラスのオブジェクトを作成
@@ -18,38 +28,24 @@
                 exit();
             }
 
-            if(isset($_POST["name"])){                       //commentがPOSTされているなら。 //POSTで送信されたデータは連想配列$_POSTに格納されている  //issetでNULLでないか確認
+
+
+            //INSERT
+            //プリペアドステートメントを作成　ユーザ入力を使用する箇所は?にしておく
+            $stmt = $mysqli->prepare("INSERT INTO datas (name, message) VALUES (?, ?)");    //-> アロー演算子
+
+
+            if(isset($_POST["name"])&&isset($_POST["comment"])){                       //commentがPOSTされているなら。 //POSTで送信されたデータは連想配列$_POSTに格納されている  //issetでNULLでないか確認
                 $name = htmlspecialchars($_POST["name"]);   //エスケープ（特殊な意味があるために表示できない文字を他の文字列に変換）してから表示
                 //print("あなたのハンドルネームは「 ${name} 」です。");
-
-                //INSERT
-                //プリペアドステートメントを作成　ユーザ入力を使用する箇所は?にしておく
-                $stmt = $mysqli->prepare("INSERT INTO datas (name, message) VALUES (?, ?)");    //-> アロー演算子
                 //$_POST["name"]に名前が、$_POST["message"]に本文が格納されているとする。
                 //?の位置に値を割り当てる
                 $stmt->bind_param('ss', $_POST["name"], $_POST["message"]);     //bind_paramの第1引数は割り当てる変数の型 ss 文字列2つ
                 //実行
                 $stmt->execute();
-
-            }
-            if(isset($_POST["comment"])){
-                $comment = htmlspecialchars($_POST["comment"]);
-                //print("あなたのコメントは「 ${comment} 」です。");        //print($_POST["comment"]); //print_r($_POST);
-                
-                
             }
             else{
-        ?>
-            <section>
-                <h2 class="a">書き込む</h2>               
-                <form method="POST" action="bbs.php">      <!-- actionは送信先URL -->
-                    ハンドルネーム：<input type="text" name="name" value=""><br><br>
-                    <textarea name="comment" cols=40 rows=4 placeholder="コメントをどうぞ"></textarea>
-                    <input type="submit" value="投稿" />      <!-- <form>タグのactionが呼び出される 送信ボタン -->
-                    <input type="reset" value="取消">
-                </form>
-            </section>
-        <?php
+                print("(ハンドルネーム・コメントをご記入ください)");
             }
         ?>
 
