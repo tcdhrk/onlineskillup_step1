@@ -7,9 +7,7 @@ if ($mysqli->connect_error){
     print("接続失敗：" . $mysqli->connect_error);
     exit();
 }
-?>
 
-<?php
 //実行　INSERTの例
 //プリペアドステートメントを作成　ユーザ入力を使用する箇所は?にしておく
 $stmt = $mysqli->prepare("INSERT INTO datas (name, message) VALUES (?, ?)");    //-> アロー演算子
@@ -18,12 +16,7 @@ $stmt = $mysqli->prepare("INSERT INTO datas (name, message) VALUES (?, ?)");    
 $stmt->bind_param('ss', $_POST["name"], $_POST["message"]);     //bind_paramの第1引数は割り当てる変数の型 ss 文字列2つ
 //実行
 $stmt->execute();
-?>
 
-
-
-
-<?php
 //実行　SERECTの例
 //datasテーブルから日付の降順でデータを取得
 $result = $mysqli->query("SELECT * FROM datas ORDER BY created DESC");
@@ -37,11 +30,7 @@ if($result){
         print("$name : $message ($created)<br>");
     }
 }
-?>
 
-
-
-<?php
 //切断
 $mysqli->close();
 ?>
