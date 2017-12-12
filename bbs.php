@@ -28,12 +28,9 @@
                 exit();
             }
 
-
-
             //INSERT
             //プリペアドステートメントを作成　ユーザ入力を使用する箇所は?にしておく
             $stmt = $mysqli->prepare("INSERT INTO datas (name, message) VALUES (?, ?)");    //-> アロー演算子
-
 
             if(isset($_POST["name"])&&isset($_POST["comment"])){                       //commentがPOSTされているなら。 //POSTで送信されたデータは連想配列$_POSTに格納されている  //issetでNULLでないか確認
                 $name = htmlspecialchars($_POST["name"]);   //エスケープ（特殊な意味があるために表示できない文字を他の文字列に変換）してから表示
